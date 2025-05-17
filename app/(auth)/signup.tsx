@@ -13,10 +13,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useAppDispatch, useAppSelector } from "@/redux/store/store";
+import { registerNewUser } from "@/services/authService";
 
 const Signup = () => {
-    const dispatch = useAppDispatch();
-    // const { isLoading, error } = useAppSelector((state) => state.auth);
 
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -24,7 +23,7 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const [formErrors, setFormErrors] = useState({
         fullName: "",
         email: "",
@@ -75,9 +74,21 @@ const Signup = () => {
     };
 
     const handleSignup = async () => {
+
         if (validateForm()) {
-            console.log("Signup form is valid");
-            // dispatch signup action here
+
+            // Perform signup logic here
+            setLoading(true);
+            try {
+                const res = await registerNewUser({ name: fullName, email, password });
+                if (res) {
+                    router.push("/(tabs)/dashboard")
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
@@ -219,19 +230,19 @@ const Signup = () => {
                     {/* Bottom Section */}
                     <View className="space-y-4 mt-6">
                         {/* Signup Button */}
-                        {/* <TouchableOpacity
-                            className={`bg-primary-500 rounded-xl py-4 ${isLoading ? "opacity-50" : ""}`}
+                        <TouchableOpacity
+                            className={`bg-primary-500 rounded-xl py-4 ${loading ? "opacity-50" : ""}`}
                             onPress={handleSignup}
-                            disabled={isLoading}
+                            disabled={loading}
                         >
-                            {isLoading ? (
+                            {loading ? (
                                 <ActivityIndicator color="#ffffff" />
                             ) : (
                                 <Text className="text-dark-text text-center font-bold text-lg">
                                     Create Account
                                 </Text>
                             )}
-                        </TouchableOpacity> */}
+                        </TouchableOpacity>
 
                         {/* Login Link */}
                         <View className="flex-row justify-center mt-2">

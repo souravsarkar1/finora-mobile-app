@@ -1,13 +1,32 @@
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from '../redux/store/store';
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
 import { router } from "expo-router";
+import { verifyToken } from "@/services/authService";
 
 const LandingScreen = () => {
-  const dispatch = useAppDispatch();
 
+  const { token } = useAppSelector(st => st.auth);
+
+
+  useEffect(() => {
+    if (token) {
+      (async () => {
+        try {
+          const res = await verifyToken({ token: token });
+          console.log(res, "res");
+          if (res) {
+            router.replace('/(tabs)/dashboard');
+          }
+        } catch (error) {
+          console.log(error);
+
+        }
+      })()
+    }
+  }, [])
   return (
     <SafeAreaView className="flex-1 bg-dark-bg">
       <StatusBar style="light" />

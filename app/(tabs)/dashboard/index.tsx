@@ -236,7 +236,7 @@ const Dashboard: React.FC = () => {
                             Total Spent: ${monthlyData?.totalAmount || 0}
                         </Text>
                     </View>
-                    <View className="flex-row items-center space-x-2">
+                    <View className="flex-row mt-5 items-center space-x-2">
                         <TouchableOpacity
                             className="p-2"
                             onPress={() => {
@@ -277,28 +277,28 @@ const Dashboard: React.FC = () => {
                             <View className="flex-row space-x-2">
                                 <TouchableOpacity
                                     className={`px-4 py-2 rounded-lg ${graphType === 'line'
-                                            ? 'bg-primary-500'
-                                            : 'bg-dark-border'
+                                        ? 'bg-primary-500'
+                                        : 'bg-dark-border'
                                         }`}
                                     onPress={() => setGraphType('line')}
                                 >
                                     <Text className={`${graphType === 'line'
-                                            ? 'text-white'
-                                            : 'text-dark-text'
+                                        ? 'text-white'
+                                        : 'text-dark-text'
                                         }`}>
                                         Line
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     className={`px-4 py-2 rounded-lg ${graphType === 'bar'
-                                            ? 'bg-primary-500'
-                                            : 'bg-dark-border'
+                                        ? 'bg-primary-500'
+                                        : 'bg-dark-border'
                                         }`}
                                     onPress={() => setGraphType('bar')}
                                 >
                                     <Text className={`${graphType === 'bar'
-                                            ? 'text-white'
-                                            : 'text-dark-text'
+                                        ? 'text-white'
+                                        : 'text-dark-text'
                                         }`}>
                                         Bar
                                     </Text>
@@ -310,14 +310,14 @@ const Dashboard: React.FC = () => {
                 )}
 
                 {/* Expenses List */}
-                <View className="space-y-4">
+                <View style={{ marginBottom: 20 }} className="space-y-4 pt-3 pb-3">
                     <Text className="text-dark-text text-lg font-bold">
                         Recent Expenses
                     </Text>
                     {monthlyData?.expenses?.map((expense) => (
                         <View
                             key={expense._id}
-                            className="bg-dark-card p-4 rounded-xl border border-dark-border"
+                            className="bg-dark-card p-4 rounded-xl mt-4 border border-dark-border"
                         >
                             <View className="flex-row justify-between items-center">
                                 <View>

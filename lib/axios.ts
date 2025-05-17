@@ -2,7 +2,7 @@ import axios from 'axios';
 import { store } from '@/redux/store/store';
 
 // Use environment variable if available, fallback to development URL
-export const baseURL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.31.5:5000';
+export const baseURL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.106:5000';
 
 export const axiosInstance = axios.create({
   baseURL,
